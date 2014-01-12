@@ -57,6 +57,17 @@ module ``about the stock example`` =
 
     [<Koan>]
     let YouGotTheAnswerCorrect() =
-        let result =  __
+        let splitCommas (x:string) =
+            x.Split([|','|])
+
+        let parsedStockData = 
+            stockData
+            |> List.map splitCommas
+            |> List.tail 
+            |> List.maxBy (fun x -> abs(float x.[1] - float x.[4]))
+                
+        
+
+        let result =  parsedStockData.[0]
         
         AssertEquality "2012-03-13" result
